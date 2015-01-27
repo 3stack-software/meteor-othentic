@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "eventemitter2": {
+      "version": "0.4.13"
+    },
+    "oauth-client": {
+      "version": "0.3.0",
+      "dependencies": {
+        "node-uuid": {
+          "version": "1.1.0"
+        }
+      }
+    }
+  }
+}
