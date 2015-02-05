@@ -8,7 +8,7 @@ class Othentic.Request
 
   @METHOD_GET = 'GET'
 
-  constructor: (@https, @host, @port, @path, @signer)->
+  constructor: (@https, @host, @port, @path, @signer, @rejectUnauthorized=true)->
     @params = {}
     @headers = {}
     @body = null
@@ -63,8 +63,8 @@ class Othentic.Request
       method: @method
       oauth_signature: @signer
       headers: @headers
-      rejectUnauthorized: false
-      requestCert: true
+      rejectUnauthorized: @rejectUnauthorized
+      requestCert: @rejectUnauthorized
 
     if @body?
       # work around for oauth package - it serializes the body even if it isn't form-encoded (http://tools.ietf.org/html/rfc5849#section-3.4.1.3)

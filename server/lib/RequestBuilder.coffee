@@ -19,6 +19,7 @@ class Othentic.RequestBuilder
       @serviceConfiguration.port,
       @path,
       signer,
+      @serviceConfgiuration.verifyCertificate == null || @serviceConfgiuration.verifyCertificate
     )
     return request
 
