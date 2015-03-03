@@ -1,7 +1,7 @@
 Othentic
 =======================
 
-A package for authenticating & communicating with 3-legged OAuth 1.0 sources
+A package for authenticating & communicating with 3-legged & 2-legged OAuth 1.0 sources
 
 ** You should probably come back once better documentation can be written **
 

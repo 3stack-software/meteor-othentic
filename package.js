@@ -1,7 +1,7 @@
 Package.describe({
   name: '3stack:othentic',
-  version: '1.0.1',
-  summary: 'A package for authenticating & communicating with 3-legged OAuth 1.0 sources',
+  version: '1.0.2',
+  summary: 'A package for authenticating & communicating with 3-legged & 2-legged OAuth 1.0 sources',
   git: 'https://github.com/3stack-software/meteor-othentic',
   documentation: 'README.md'
 });
