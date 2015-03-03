@@ -18,7 +18,7 @@ Othentic.initiateHandshakePopup = (providerId, userId, callback)->
   successUrl = Router.url('othentic.initiateHandshake', {providerId: providerId, userId: userId}, {query: query})
   if options.cookieCheckUrl
     failureUrl = Router.url('othentic.initiateHandshake', {providerId: providerId, userId: userId}, {query: {requireNewWindow: true}})
-    url = URI(options.cookieCheckUrl).query({success: successUrl, failure: failureUrl})
+    url = URI(options.cookieCheckUrl).query({success: successUrl, failure: failureUrl}).toString()
   else
     url = successUrl
 
