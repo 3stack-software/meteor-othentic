@@ -22,6 +22,11 @@ Meteor.publish 'othentic.status', (providerId, serviceConfigurationId)->
     @ready()
     return
 
+  if serviceConfiguration.twoLegged
+    @added('othentic.status', providerId, {status: Othentic.STATUS_CONNECTED, expiry: null})
+    @ready()
+    return
+
   accessTokenExpiry =  serviceConfiguration.tokenExpiry?[Othentic.TokenStore.TYPE_ACCESS] ? Othentic.TokenStore.DEFAULT_EXPIRY[Othentic.TokenStore.TYPE_ACCESS]
 
   recheckInterval = 30 * 60 * 1000 # 30 mins?

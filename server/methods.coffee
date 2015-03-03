@@ -4,15 +4,15 @@ Meteor.methods
 
     serviceConfiguration = Othentic.getProviderServiceConfigurationForUser(providerId, @userId)
 
-    tokenStoreBuilder = new Othentic.TokenStoreBuilder(providerId, @userId)
-    tokenStoreBuilder.setServiceConfiguration(serviceConfiguration)
-    tokenStore = tokenStoreBuilder.build()
-
-    token = tokenStore.findAccessToken()
-
     requestBuilder = new Othentic.RequestBuilder(serviceConfiguration)
-    requestBuilder.setToken(token)
     requestBuilder.setPath(path)
+    unless serviceConfiguration.twoLegged
+      tokenStoreBuilder = new Othentic.TokenStoreBuilder(providerId, @userId)
+      tokenStoreBuilder.setServiceConfiguration(serviceConfiguration)
+      tokenStore = tokenStoreBuilder.build()
+      token = tokenStore.findAccessToken()
+      requestBuilder.setToken(token)
+
     request = requestBuilder.build()
 
     request.setMethod(method)
