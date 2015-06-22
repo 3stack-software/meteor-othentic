@@ -1,6 +1,6 @@
 Package.describe({
   name: '3stack:othentic',
-  version: '1.0.3',
+  version: '1.0.4',
   summary: 'A package for authenticating & communicating with 3-legged & 2-legged OAuth 1.0 sources',
   git: 'https://github.com/3stack-software/meteor-othentic',
   documentation: 'README.md'
@@ -19,7 +19,8 @@ Package.onUse(function (api) {
     'ddp',
     'iron:router@1.0.0',
     '3stack:uri@1.11.2',
-    '3stack:match-library@1.0.1'
+    '3stack:match-library@1.0.1',
+    '3stack:embox-value@0.2.3'
   ]);
   api.use([
     'templating',

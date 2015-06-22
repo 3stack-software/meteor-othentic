@@ -1,11 +1,26 @@
 
+statusHandlesDep = new Tracker.Dependency()
 
 _.extend(Othentic,{
+  ready: emboxValue ->
+    if not Othentic.providerHandle.ready()
+      return false
+
+    statusHandlesDep.depend()
+    for provider, handle of Othentic.statusHandles
+      if not handle.ready()
+        return false
+    return true
+  ,
+    lazy:true
+
   providers: new Mongo.Collection("othentic.providers")
 
   providerStatus: new Mongo.Collection("othentic.status")
 
   providerHandle: Meteor.subscribe("othentic.providers")
+
+  statusHandles: {}
 
   statusByProvider: new ReactiveDict()
 
@@ -38,12 +53,16 @@ class StatusMapper
   subscribeToProviderStatus: (providerId)->
     return ->
       serviceConfigurationId = Othentic.getServiceConfigurationId(providerId)
-      Meteor.subscribe('othentic.status', providerId, serviceConfigurationId)
+      handle = Meteor.subscribe('othentic.status', providerId, serviceConfigurationId)
+      Othentic.statusHandles[providerId] = handle
+      statusHandlesDep.changed()
       return
 
   run: ->
     # get a list of each provider, and ensure that we're subscribed
     providerIds = []
+    Othentic.statusHandles = {}
+    statusHandlesDep.changed()
     Othentic.providers.find({autoStatus: true}).forEach (provider)=>
       Othentic.statusByProvider.set(provider._id, Othentic.STATUS_UNKNOWN)
       providerIds.push(provider._id)
