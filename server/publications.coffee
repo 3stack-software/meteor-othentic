@@ -9,10 +9,16 @@ Meteor.publish "othentic.providers", ->
     })
 
 Meteor.publish 'othentic.status', (providerId, serviceConfigurationId)->
-  unless @userId? and serviceConfigurationId?
+  unless @userId?
     @added('othentic.status', providerId, {status: Othentic.STATUS_UNKNOWN, expiry: null})
     @ready()
     return
+
+  unless serviceConfigurationId?
+    @added('othentic.status', providerId, {status: Othentic.STATUS_UNAVAILABLE, expiry: null})
+    @ready()
+    return
+
   # Ignore `serviceConfigurationId` - Just used to cause the subscription to refresh
 
   serviceConfiguration = Othentic.getProviderServiceConfigurationForUser(providerId, @userId)
