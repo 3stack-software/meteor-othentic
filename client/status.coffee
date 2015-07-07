@@ -52,9 +52,16 @@ class StatusMapper
 
   subscribeToProviderStatus: (providerId)->
     return ->
+      # There are actually a few cases here. `getServiceConfigurationId` can return
+      #  1. undefined = we're not ready to subscribe yet.
+      #  2. null = We don't have service configuration, but we need to subscribe to get `STATUS_UNAVAILABLE`
+      #  3. <id> = We should subscribe, and get the status (CONNECTED/AVAILABLE)
       serviceConfigurationId = Othentic.getServiceConfigurationId(providerId)
-      handle = Meteor.subscribe('othentic.status', providerId, serviceConfigurationId)
-      Othentic.statusHandles[providerId] = handle
+      if serviceConfigurationId != undefined
+        handle = Meteor.subscribe('othentic.status', providerId, serviceConfigurationId)
+        Othentic.statusHandles[providerId] = handle
+      else if Othentic.statusHandles[providerId]?
+        delete Othentic.statusHandles[providerId]
       statusHandlesDep.changed()
       return
 
