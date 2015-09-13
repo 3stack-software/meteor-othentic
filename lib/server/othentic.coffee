@@ -1,4 +1,8 @@
+EventEmitter2 = Npm.require('eventemitter2').EventEmitter2
+
+
 _.extend(Othentic, {
+  events: new EventEmitter2(),
   serviceConfigurations: new Mongo.Collection("othentic.serviceConfigurations", {_preventAutoPublish: true})
   providers: new Mongo.Collection("othentic.providers")
   userTokens: new Mongo.Collection("othentic.userTokens", {_preventAutoPublish: true})

@@ -37,46 +37,60 @@ Package.onUse(function (api) {
 
   api.export('Othentic');
 
-  api.addFiles(
-    [
-      'othentic.coffee',
-      'common/statuses.coffee'
-    ]
-  );
+  //MPKGUTIL
+  api.addFiles([
+    // lib/common/.*
+    "lib/common/othentic.coffee"
+  ], ["client", "server"]);
 
-  api.addFiles(
-    [
-      'server/events.coffee',
-      'server/error/BadRequestError.coffee',
-      'server/error/InternalError.coffee',
-      'server/error/NoTokenError.coffee',
-      'server/lib/AuthoriseUrlBuilder.coffee',
-      'server/lib/Handshake.coffee',
-      'server/lib/Request.coffee',
-      'server/lib/RequestBuilder.coffee',
-      'server/lib/SignatureBuilder.coffee',
-      'server/lib/TemporaryCredentialRequest.coffee',
-      'server/lib/TokenRequest.coffee',
-      'server/lib/TokenStore.coffee',
-      'server/lib/TokenStoreBuilder.coffee',
-      'server/handlers/CallbackUrlHandler.coffee',
-      'server/handlers/InitiateHandshakeHandler.coffee',
-      'server/serviceConfigurations.coffee',
-      'server/routing.coffee',
-      'server/methods.coffee',
-      'server/publications.coffee'
-    ]
-   ,'server');
+  api.addFiles([
+    // lib/client/.*
+    "lib/client/handlebars.coffee",
+    "lib/client/initiateHandshake.coffee",
+    "lib/client/status.coffee"
+  ], ["client"]);
 
-  api.addFiles(
-    [
-      'client/connectModal.html',
-      'client/connectModal.coffee',
-      'client/status.coffee',
-      'client/handlebars.coffee',
-      'client/routing.coffee',
-      'client/initiateHandshake.coffee'
-    ],
-    'client'
-  );
+  api.addFiles([
+    // lib/server/.*
+    "lib/server/othentic.coffee",
+    "lib/server/error/BadRequestError.coffee",
+    "lib/server/error/InternalError.coffee",
+    "lib/server/error/NoTokenError.coffee",
+    "lib/server/handlers/CallbackUrlHandler.coffee",
+    "lib/server/handlers/InitiateHandshakeHandler.coffee",
+    "lib/server/request/AuthoriseUrlBuilder.coffee",
+    "lib/server/request/Handshake.coffee",
+    "lib/server/request/Request.coffee",
+    "lib/server/request/RequestBuilder.coffee",
+    "lib/server/request/SignatureBuilder.coffee",
+    "lib/server/request/TemporaryCredentialRequest.coffee",
+    "lib/server/request/TokenRequest.coffee",
+    "lib/server/token/TokenStore.coffee",
+    "lib/server/token/TokenStoreBuilder.coffee"
+  ], ["server"]);
+
+  api.addFiles([
+    // methods/server/.*
+    // publications/.*
+    "methods/server/methods.coffee",
+    "publications/publications.coffee"
+  ], ["server"]);
+
+  api.addFiles([
+    // components/.*\.html
+    // components/.*\.(js|jsx|coffee)
+    "components/connectModal.html",
+    "components/connectModal.coffee"
+  ], ["client"]);
+
+  api.addFiles([
+    // routes-server/.*
+    "routes-server/routing.coffee"
+  ], ["server"]);
+
+  api.addFiles([
+    // routes-client/.*
+    "routes-client/routing.coffee"
+  ], ["client"]);
+  //MPKGUTIL
 });

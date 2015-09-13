@@ -1,3 +1,5 @@
+Othentic = {}
+
 _.extend(Othentic, {
   STATUS_UNKNOWN: 'unknown'
   STATUS_UNAVAILABLE: 'unavailable'
