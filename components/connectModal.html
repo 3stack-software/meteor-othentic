@@ -14,18 +14,11 @@
               <i class="fa fa-check"></i> Connected to {{providerName}}
             </div>
           {{else}}
-          <div style="width: 100%; height: 575px; position: relative; border: 1px solid #eaeaea;">
-            {{#if loading}}
-              <div style="position: absolute; left:0; top:0; bottom:0; right:0; text-align: center; padding-top: 50%; background: white;">
-                <div style="margin-top: -100px;">
-                  <p>Connecting to</p>
-                  <p>{{providerName}}</p>
-                  <p><i class="fa fa-spinner fa-spin fa-2x"></i></p>
-                </div>
-              </div>
-            {{/if}}
-            <iframe src="{{oauthUrl}}" frameborder="0" style="width:100%; height: 100%;" ></iframe>
-          </div>
+            <div>
+              <a class="btn btn-default" href="{{handshakeUrl}}" target="othentic-{{providerId}}">
+                <i class="fa fa-external-link"></i> Open Authorisation Page
+              </a>
+            </div>
           {{/if}}
         </div>
       </div>
