@@ -8,16 +8,15 @@ class Othentic.TemporaryCredentialRequest
   setCallbackUrl: (@callbackUrl)->
 
   execute: ->
-    request = @buildRequest()
-    data = request.execute()
+    session = @getSession()
+    data = session.execute()
     return @parseResponse(data)
 
-  buildRequest: ->
-    builder = new Othentic.RequestBuilder(@serviceConfiguration)
-    builder.setPathToRequestTokenEndpoint()
-    request = builder.build()
-    request.setParam('oauth_callback', @callbackUrl)
-    return request
+  getSession: ->
+    session = Othentic.Session(@serviceConfiguration)
+    session.setPath(@serviceConfiguration.endpoints.requestToken)
+    session.setParam('oauth_callback', @callbackUrl)
+    return session
 
   parseResponse: (data)->
     parsedData = querystring.parse(data)

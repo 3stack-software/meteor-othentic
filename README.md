@@ -70,13 +70,13 @@ db.othentic.providers.insert({
 
 ```
 
-3. Call `Meteor.call('othentic.serviceConfigurations.insert', 'myOAuthProvider', customSetting)` to create a service configuration
+3. Open a `meteor shell` and then `Othentic.addServiceConfiguration('myOAuthProvider', customSetting)` to create a service configuration
 
 
 4. On the client, connect the user to the provider: `Othentic.initiateHandshakePopup(providerId, userId, callback)` (Note: you will need a remodal placeholder -> `{{> remodal }}`)
 
 5. Then, check the status with `Othentic.status(providerId)` (Compare against `Othentic.STATUS_*`)
 
-6. Once connected, then you can make requests with `othentic.request`, `othentic.post`, `othentic.get`, and `othentic.jsonrpc`
+6. Once connected, then you can make requests with `Othentic.HTTP.request` on the server.
 
 

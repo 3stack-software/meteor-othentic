@@ -4,17 +4,15 @@ class Othentic.TokenRequest
   constructor: (@serviceConfiguration, @requestToken, @verifier)->
 
   execute: ->
-    request = @buildRequest()
-    data = request.execute()
+    session = @getSession()
+    data = session.execute()
     return @parseResponse(data)
 
-  buildRequest: ->
-    builder = new Othentic.RequestBuilder(@serviceConfiguration)
-    builder.setPathToAccessTokenEndpoint()
-    builder.setToken(@requestToken)
-    request = builder.build()
-    request.setParam('oauth_verifier', @verifier)
-    return request
+  getSession: ->
+    session = Othentic.Session(@serviceConfiguration, @requestToken)
+    session.setPath(@serviceConfiguration.endpoints.accessToken)
+    session.setParam('oauth_verifier', @verifier)
+    return session
 
   parseResponse: (data)->
     parsedData = querystring.parse(data)

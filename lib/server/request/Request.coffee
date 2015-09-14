@@ -8,7 +8,8 @@ class Othentic.Request
 
   @METHOD_GET = 'GET'
 
-  constructor: (@https, @host, @port, @path, @signer, @rejectUnauthorized=true)->
+  constructor: (@https, @host, @port, @signer, @rejectUnauthorized=true)->
+    @path = '/'
     @params = {}
     @headers = {}
     @body = null

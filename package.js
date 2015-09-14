@@ -1,6 +1,6 @@
 Package.describe({
   name: '3stack:othentic',
-  version: '1.1.0',
+  version: '1.2.0',
   summary: 'A package for authenticating & communicating with 3-legged & 2-legged OAuth 1.0 sources',
   git: 'https://github.com/3stack-software/meteor-othentic',
   documentation: 'README.md'
@@ -45,7 +45,6 @@ Package.onUse(function (api) {
 
   api.addFiles([
     // lib/client/.*
-    "lib/client/handlebars.coffee",
     "lib/client/initiateHandshake.coffee",
     "lib/client/status.coffee"
   ], ["client"]);
@@ -58,11 +57,11 @@ Package.onUse(function (api) {
     "lib/server/error/NoTokenError.coffee",
     "lib/server/handlers/CallbackUrlHandler.coffee",
     "lib/server/handlers/InitiateHandshakeHandler.coffee",
-    "lib/server/request/AuthoriseUrlBuilder.coffee",
+    "lib/server/request/AuthorisationUrl.coffee",
     "lib/server/request/Handshake.coffee",
     "lib/server/request/Request.coffee",
-    "lib/server/request/RequestBuilder.coffee",
-    "lib/server/request/SignatureBuilder.coffee",
+    "lib/server/request/Session.coffee",
+    "lib/server/request/Signer.coffee",
     "lib/server/request/TemporaryCredentialRequest.coffee",
     "lib/server/request/TokenRequest.coffee",
     "lib/server/token/TokenStore.coffee",
@@ -70,9 +69,7 @@ Package.onUse(function (api) {
   ], ["server"]);
 
   api.addFiles([
-    // methods/server/.*
     // publications/.*
-    "methods/server/methods.coffee",
     "publications/publications.coffee"
   ], ["server"]);
 

@@ -4,7 +4,7 @@ class Othentic.Handshake
   obtainRequestTokenAndAuthoriseUrl: (callbackUrl)->
     @getAndSaveServiceConfiguration()
     tokenKey = @obtainAndStoreRequestToken(callbackUrl)
-    return @getAuthoriseUrl(tokenKey)
+    return Othentic.AuthorisationUrl(@serviceConfiguration, tokenKey)
 
 
   obtainAndStoreAccessToken: (requestTokenKey, requestVerifier)->
@@ -47,10 +47,6 @@ class Othentic.Handshake
     request = new Othentic.TemporaryCredentialRequest(@serviceConfiguration)
     request.setCallbackUrl(callbackUrl)
     return request.execute()
-
-  getAuthoriseUrl: (tokenKey)->
-    builder = new Othentic.AuthoriseUrlBuilder(@serviceConfiguration, tokenKey)
-    return builder.build()
 
   obtainAccessToken: (requestToken, verifier)->
     request = new Othentic.TokenRequest(@serviceConfiguration, requestToken, verifier)
