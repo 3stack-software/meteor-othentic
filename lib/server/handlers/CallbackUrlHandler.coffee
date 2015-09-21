@@ -23,7 +23,7 @@ class Othentic.CallbackUrlHandler
   respondToAuthoriseCallback: ->
     if 'close' of @params.query
       @response.writeHead(200, {'Content-Type': 'text/html'})
-      @response.end('<html><head><script>window.close()</script></head></html>', 'utf-8')
+      @response.end('<html><head><script src="/packages/3stack_othentic/assets/close.js"></script></head></html>', 'utf-8')
     else if @params.query.redirect?
       @response.writeHead(302, {'Location': @params.query.redirect})
       @response.end()

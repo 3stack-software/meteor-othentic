@@ -7,6 +7,12 @@ Package.describe({
 });
 
 Package.onUse(function (api) {
+  // Make 1.2 style packages compatible with Meteor 1.1
+  if (!api.addAssets){
+    api.addAssets = function(files, where){
+      this.addFiles(files, where, {isAsset: true});
+    };
+  }
   api.versionsFrom('METEOR@1.1.0.2');
 
   api.use([
@@ -89,5 +95,10 @@ Package.onUse(function (api) {
     // routes-client/.*
     "routes-client/routing.coffee"
   ], ["client"]);
+
+  api.addAssets([
+    // assets/.*
+    "assets/close.js"
+  ], ["client", "server"]);
   //MPKGUTIL
 });
