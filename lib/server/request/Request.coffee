@@ -27,16 +27,19 @@ class Othentic.Request
         data += chunk
         return
       response.on 'end', ->
-        future.return([null, response, data])
+        unless future.isResolved()
+          future.return([null, response, data])
         return
       response.on 'close', ->
-        future.return([new Othentic.InternalError("Connection closed", requestSettings), null, null])
+        unless future.isResolved()
+          future.return([new Othentic.InternalError("Connection closed", requestSettings), null, null])
         return
       return
 
     request.on 'error', (err)->
       Log.error("Othentic::Request received error on http connection", requestSettings, err)
-      future.return([new Othentic.InternalError("Connection closed", requestSettings), null, null])
+      unless future.isResolved()
+        future.return([new Othentic.InternalError("Connection closed", requestSettings), null, null])
       return
 
     if requestSettings.body?
