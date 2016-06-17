@@ -1,6 +1,6 @@
 Package.describe({
   name: '3stack:othentic',
-  version: '1.2.2',
+  version: '1.2.3',
   summary: 'A package for authenticating & communicating with 3-legged & 2-legged OAuth 1.0 sources',
   git: 'https://github.com/3stack-software/meteor-othentic',
   documentation: 'README.md'
@@ -13,7 +13,7 @@ Package.onUse(function (api) {
       this.addFiles(files, where, {isAsset: true});
     };
   }
-  api.versionsFrom('METEOR@1.1.0.2');
+  api.versionsFrom('METEOR@1.2.1');
 
   api.use([
     'logging',
