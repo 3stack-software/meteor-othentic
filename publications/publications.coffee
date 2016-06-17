@@ -43,8 +43,7 @@ Meteor.publish 'othentic.status', (providerId, serviceConfigurationId)->
     expiries = _.values(tokensExpiries)
     if expiries.length
       newestToken = Math.max.apply(Math, expiries)
-      newestToken += accessTokenExpiry
-      newestToken -= recheckInterval
+      newestToken += (accessTokenExpiry - recheckInterval)
       return [Othentic.STATUS_CONNECTED, newestToken]
     else
       return [Othentic.STATUS_AVAILABLE, null]
@@ -84,7 +83,10 @@ Meteor.publish 'othentic.status', (providerId, serviceConfigurationId)->
       userId: userId
       type: Othentic.TokenStore.TYPE_ACCESS
       createdAt: {
-        $gt: +(new Date()) - accessTokenExpiry - recheckInterval
+        # Return tokens that are unexpired, but shorten
+        #  the expiry date by the `recheckInterval`
+        # This means tokens will "expire" early to the user.
+        $gt: +(new Date()) - (accessTokenExpiry - recheckInterval)
       }
     }).observe({
       added: onTokenAdded,
